@@ -1,0 +1,14 @@
+{
+  "name": "wire-web-autotest",
+  "version": "1.0.0",
+  "description": "Web Test Automation project for the Wire App",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^24.0.0"
+  }
+}
