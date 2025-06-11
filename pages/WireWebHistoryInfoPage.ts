@@ -12,7 +12,8 @@ export class WireWebHistoryInfoPage {
     private async isHistoryInfoPageIsDisplayed(): Promise<boolean> {
         let isCurrentUrlContainsHistory = false;
         try {
-            await this.page.waitForURL(/.*historyinfo.*/i, { timeout: 5000 });
+            //Wait for the HistoryInfo Page to Load as on Github its Slow, So added explicit wait.
+            await this.page.waitForURL(/.*historyinfo.*/i, { timeout: 10000 });
             isCurrentUrlContainsHistory = true;
         } catch {
             // As 'historyinfo' URL is not displayed within timeout — that's okay
