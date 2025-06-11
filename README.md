@@ -1,13 +1,59 @@
 # Wire Web AutoTest
 
-This is a demo project for automated testing of the **Wire Web Application** using Playwright and **TypeScript**.  
+This is a demo project for automated testing of the **Wire Web Application** using **Playwright** and **TypeScript**.  
 It focuses on login and logout functionality and demonstrates a structured approach using the **Page Object Model (POM)** with method chaining to simulate behavior-driven flows.
 Modular way to represent parts of a page. This follows the composition pattern in the Page Object Model, where a page is composed of reusable components like ConversationSideBar, Settings, Actions, Devices.
 
-🔍 Benefits:
-Fluent navigation between pages
-Encapsulation of page-specific logic
-Improved test readability
+## Page Object Model Strategy Concept  
+
+Each Wire web page or major UI section is represented by a dedicated class. These classes encapsulate:
+
+The selectors used to interact with the page
+The actions that can be performed on that page
+The assertions to verify expected behavior
+
+🔹 Example: **WireWebUserConversationsPage.ts**  
+This class represents the main Conversations page a user sees after logging in. It includes:
+
+All method/actions user can see/perform on the conversations page.
+A reference to a subsection: ConversationsSidebar, which hold all method user can perform on Side Bar.
+
+```TypeScript
+export class WireWebUserConversationsPage {
+    readonly conversationsSidebar: ConversationsSidebar; //Variable for SideBar.
+
+    constructor(private page: Page) {
+        this.conversationsSidebar = new ConversationsSidebar(page);
+    }
+
+    async verifyUserIsAbleToLoginOnWireWeb(expectedFirstName: string) {
+        await expect(this.page.getByText(expectedFirstName)).toBeVisible();
+    }
+}
+```
+🔹 Subsection: **ConversationsSidebar.ts**  
+This class represents a component within the main page (like a sidebar). It is only accessible through the main page class, ensuring encapsulation and logical structure.
+```TypeScript
+export class ConversationsSidebar {
+    constructor(private page: Page) {}
+
+    async clickSettings(): Promise<SettingsPage> {
+        await this.page.getByRole('tab', { name: 'Settings' }).click();
+        return new SettingsPage(this.page);
+    }
+}
+```
+🔹 Usage Example
+```TypeScript
+const wireWebUserConversationsPage = new WireWebUserConversationsPage(page);
+//conversationsSidebar is avilable inside the main Page.
+const settingsPage = await wireWebUserConversationsPage.conversationsSidebar.clickSettings();
+```
+✅ Why This Structure?  
+Encapsulation: Keeps related functionality grouped together  
+Reusability: Common actions can be reused across tests  
+Readability: Tests read like user actions  
+Maintainability: Changes in UI only require updates in one place  
 
 ---
 
