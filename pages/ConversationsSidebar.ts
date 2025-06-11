@@ -1,5 +1,5 @@
 
-import { Locator, Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { SettingsPage } from './settings/SettingsPage';
 
 export class ConversationsSidebar {

@@ -1,4 +1,4 @@
-import { expect, Expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { ConversationsSidebar } from "./ConversationsSidebar";
 
 export class WireWebUserConversationsPage {

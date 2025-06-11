@@ -1,4 +1,4 @@
-import { expect, Expect, Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { ConversationsSidebar } from "../ConversationsSidebar";
 import { AccountSection } from './AccountSection';
 
