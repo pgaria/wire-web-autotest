@@ -1,6 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
+  timeout: 60000, // 60 seconds for each test
+  use: {
+    actionTimeout: 10000, //10 seconds for action
+    navigationTimeout: 30000, // 30 seconds for navigation
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  },
+  expect: {
+    timeout: 10000, // 10 seconds for all expect() calls
+  },
+
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -12,13 +23,8 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-  },
 
-  /* Configure projects for major browsers */
+  /* Running on Chrome browser Only for now */
   projects: [
     {
       name: 'chromium',

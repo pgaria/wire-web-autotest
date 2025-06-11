@@ -9,14 +9,14 @@ test('Verify Login and Logout on Wire Web App', async ({ page }) => {
 
   // Login with userEmail and password.
   const wireConversationsPage = await wireLoginPage.loginWithEmailAndPassword(envConfig.testEmail,envConfig.testPassword);
-  await wireConversationsPage.verifyUserIsAbleToLoginOnWireWeb(envConfig.userFirstName);
+  await wireConversationsPage.verifyUserIsAbleToLoginOnWireWeb(envConfig.userTitle);
   
-  // Click Settings -> Accounts -> LogOut
+  // Click Settings -> Accounts
   const settingsPage = await wireConversationsPage.conversationsSidebar.clickSettings();
   const accountSection = await settingsPage.clickAccount();
-  await accountSection.clickLogOut();
-  wireLoginPage = await accountSection.clickLogOutInClearDataDialog();
 
-  //Verify if Logout Success and Login Page is displayed
+  // Click LogOut and Verify Logout Successfully and Login Page is displayed again.
+  await accountSection.clickLogOut();
+  wireLoginPage = await accountSection.clickLogOutInClearDataDialog();
   await wireLoginPage.verifyWireWebAppLoginPageIsDisplayed();
 });

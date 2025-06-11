@@ -1,6 +1,7 @@
-import { expect, Expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { envConfig } from "../environment.config";
 import { WireWebUserConversationsPage } from "./WireWebUserConversationsPage";
+import { WireWebHistoryInfoPage } from "./WireWebHistoryInfoPage";
 
 export class WireWebLoginPage {
     constructor(private page: Page) {
@@ -14,7 +15,7 @@ export class WireWebLoginPage {
     async verifyWireWebAppLoginPageIsDisplayed() {
         await expect(this.page.getByText('Welcome to Wire!'), 'Failed to load Wire login page').toBeVisible();
     }
-    
+
     async loginWithEmailAndPassword(email: string, password: string): Promise<WireWebUserConversationsPage> {
         await this.loginWithEmail(email);
         await this.enterPasswordIfMasked(password);
@@ -34,6 +35,7 @@ export class WireWebLoginPage {
         await expect(passwordInput, 'Password input should be masked').toHaveAttribute('type', 'password');
         await passwordInput.fill(password);
         await this.clickLoginButton();
+        await new WireWebHistoryInfoPage(this.page).handleHistoryInfoMessageIfDisplayedAfterLogin();
     }
 
     private async clickLoginButton() {
