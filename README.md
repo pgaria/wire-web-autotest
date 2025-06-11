@@ -1,8 +1,7 @@
 # Wire Web AutoTest
 
 This is a demo project for automated testing of the **Wire Web Application** using Playwright and **TypeScript**.  
-It focuses on login and logout functionality and demonstrates a structured approach using the **Page Object Model (POM)** with method chaining  
-to simulate behavior-driven flows.
+It focuses on login and logout functionality and demonstrates a structured approach using the **Page Object Model (POM)** with method chaining to simulate behavior-driven flows.
 Modular way to represent parts of a page. This follows the composition pattern in the Page Object Model, where a page is composed of reusable components like ConversationSideBar, Settings, Actions, Devices.
 
 🔍 Benefits:
@@ -55,5 +54,5 @@ export const environment = {
    ```
 ## 🧪 Running On Github Actions
 
-Project is alrady configured to run on Github Actions and everytime build and run tests.    
+Project is already configured to run on Github Actions and everytime build and run tests.    
 https://github.com/pgaria/wire-web-autotest/actions
